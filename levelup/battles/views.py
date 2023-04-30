@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import UserForm
 from .models import User, Battle,History, Checkin, Money
-
+from .verbwire import create_token, view_minted_nft, mint_nft_from_image, withdraw_fund
 from django.utils import timezone
 import random
 
@@ -71,7 +71,7 @@ def create_battle(request):
         
         Battle.objects.create(name=name, description=description, end_date=end_date,
                               challenge_amount=challenge_amount, created_by=created_by)
-
+        create_token(tokenInitialSupply=2)
         return redirect( 'home')
     else:
 
@@ -84,6 +84,16 @@ def battle_details(request, id):
     battle = Battle.objects.get(id=id)
     history=History.objects.filter(battle_id=id)
 
+    openai.api_key = os.environ['apikey']
+    prompt = "Image you are my mentor. write a detailed plan for me with date and time to "+battle.name
+
+    # Call the OpenAI API to generate a response
+    response = openai.Completion.create(
+    engine="text-davinci-002",
+    prompt=prompt,
+    max_tokens=50
+    )
+
     context = {
         'battle': battle,
         'history': history,
@@ -95,7 +105,7 @@ def battle_details(request, id):
     if current_date>=battle.end_date.date():
         if random.randint(1, 100)==Battle.created_by:
            context['won']=True
-          
+           withdraw_fund("0x761b7Df25b71B15a8A57C344a41523ADee2b18A9") 
 
 
     return render(request, 'battle-details.html', context)
@@ -104,11 +114,11 @@ def upload_image(request):
     if request.method == 'POST':
         image = request.FILES.get('image')
         my_model = Checkin.objects.create(image=image)
- 
+        mint_nft_from_image('name','description','filename')
         return redirect('success')
     return render(request, 'upload_image.html')
 
 def minted_nft(request):
-  
+    minted_nft = view_minted_nft()
     nft_details=json.loads(minted_nft)["nfts_minted"]["NFT details"]
     return render(request, 'view_minted_nft.html', {'nft_details': nft_details})
