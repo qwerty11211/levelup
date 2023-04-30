@@ -1,0 +1,37 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<main>
+   <div class="head-title">
+      <div class="left">
+         <h1>View minted NFT</h1>
+      </div>
+   </div>
+   <div class="table-data">
+      <div class="order">
+         <div class="head">
+            <i class="bx bx-search"></i>
+            <i class="bx bx-filter"></i>
+         </div>
+         <table>
+            <thead>
+               <tr>
+                  <th>Network chain</th>
+                  <th>Symbol</th>
+                  <th>Transaction Hash</th>
+               </tr>
+            </thead>
+            <tbody>
+               {% for nft in nft_details %}
+               <tr>
+                  <td>
+                     <p>{{ nft.chain }}</p>
+                  </td>
+                  <td>{{ nft.contractSymbol }}</td>
+                  <td><span class="status completed">{{nft.transactionHash}}</span></td>
+               </tr>
+               {% endfor %}
+            </tbody>
+         </table>
+      </div>
+   </div>
+</main>
+{% endblock %}

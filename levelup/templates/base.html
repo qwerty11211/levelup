@@ -68,5 +68,32 @@
          </ul>
       </section>
       <!-- SIDEBAR -->
+
+      <!-- CONTENT -->
+      <section id="content">
+         <!-- NAVBAR -->
+         <nav>
+            <i class="bx bx-menu"></i>
+            <a href="#" class="nav-link">Categories</a>
+            <form action="#">
+               <div class="form-input1">
+                  <input type="search" placeholder="Search..." />
+                  <button type="submit" class="search-btn"><i class="bx bx-search"></i></button>
+               </div>
+            </form>
+            <input type="checkbox" id="switch-mode" hidden />
+            <label for="switch-mode" class="switch-mode"></label>
+            <a href="#" class="notification">
+               <i class="bx bxs-bell"></i>
+               <span class="num">8</span>
+            </a>
+            <a href="#" class="profile">
+               <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80" />
+            </a>
+         </nav>
+         <!-- NAVBAR -->
+         {% block content %} {% endblock %}
+      </section>
+      <!-- CONTENT -->
    </body>
 </html>
