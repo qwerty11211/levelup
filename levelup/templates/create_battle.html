@@ -1,0 +1,27 @@
+{% extends 'base.html' %} {% block content %}
+<div class="row">
+   <div class="col-md-6">
+      <div class="battle">
+         <h1 class="battleheading">Create a Battle</h1>
+         <form method="post" class="createbattle">
+            {% csrf_token %}
+            <label for="name">Name:</label><br />
+            <input type="text" id="name" name="name" /><br />
+
+            <label for="description">Description:</label><br />
+            <input type="text" id="description" name="description" /><br />
+
+            <label for="end_date">End Date:</label><br />
+            <input type="datetime-local" id="end_date" name="end_date" /><br />
+
+            <label for="challenge_amount">Challenge Amount:</label><br />
+            <input type="text" id="challenge_amount" name="challenge_amount" /><br />
+
+            <br />
+            <input type="submit" value="Submit" />
+         </form>
+      </div>
+   </div>
+</div>
+
+{% endblock %}

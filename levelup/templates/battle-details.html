@@ -1,0 +1,50 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<main>
+   <ul class="box-info">
+      <li>
+         <i class="bx bxs-user"></i>
+         <span class="text">
+            <h3>{{battle.number_of_users}} members</h3>
+            <p>in this battle</p>
+         </span>
+      </li>
+      <li>
+         <i class="bx bxs-calendar"></i>
+         <span class="text">
+            <h3>0 days</h3>
+            <p>remaining</p>
+         </span>
+      </li>
+      <li>
+         <i class="bx bxs-wallet-alt"></i>
+         <span class="text">
+            <h3>${{battle.cash_pool}}</h3>
+            <p>in cash pool</p>
+         </span>
+      </li>
+   </ul>
+
+   <div class="table-data">
+      <div class="order">
+         <h3>Detailed plan</h3>
+         <div class="head">
+            <i class="bx bx-search"></i>
+            <i class="bx bx-filter"></i>
+         </div>
+      </div>
+      <div class="todo">
+         <div class="head">
+            <h3>Challenge history</h3>
+            <i class="bx bx-plus"></i>
+            <i class="bx bx-filter"></i>
+         </div>
+         <ul>
+            {% for message in history %}
+            <li>- {{message.message}}</li>
+            <br />
+            {% endfor %}
+         </ul>
+      </div>
+   </div>
+</main>
+{% endblock %}

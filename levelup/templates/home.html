@@ -1,0 +1,93 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+<main>
+   <div class="head-title">
+      <div class="left">
+         <h1>Dashboard</h1>
+         <ul class="breadcrumb">
+            <li>
+               <a href="#">Dashboard</a>
+            </li>
+            <li><i class="bx bx-chevron-right"></i></li>
+            <li>
+               <a class="active" href="#">Home</a>
+            </li>
+         </ul>
+      </div>
+      <a href="{% url 'create_battle' %}" class="btn-download">
+         <i class="bx bxs-add-to-queue"></i>
+         <span class="text">Add new battle</span>
+      </a>
+   </div>
+
+   <ul class="box-info">
+      <li>
+         <i class="bx bxs-ghost"></i>
+         <span class="text">
+            <h3>12 Monsters</h3>
+            <p>defected</p>
+         </span>
+      </li>
+      <li>
+         <i class="bx bxs-eyedropper"></i>
+         <span class="text">
+            <h3>2 Battles</h3>
+            <p>in progress</p>
+         </span>
+      </li>
+      <li>
+         <i class="bx bxs-dollar-circle"></i>
+         <span class="text">
+            <h3>$100</h3>
+            <p>Earned</p>
+         </span>
+      </li>
+   </ul>
+
+   <div class="table-data">
+      <div class="order">
+         <div class="head">
+            <h3>Recent Battles</h3>
+            <i class="bx bx-search"></i>
+            <i class="bx bx-filter"></i>
+         </div>
+         <table>
+            <thead>
+               <tr>
+                  <th>Name</th>
+                  <th>Ending on</th>
+                  <th>Challenge amount</th>
+               </tr>
+            </thead>
+
+            <tbody>
+               {% for battle in battles %}
+               <tr>
+                  <td>
+                     <a href="{% url 'battle_details' battle.id %}"><p>{{ battle.name }}</p></a>
+                  </td>
+                  <td>{{ battle.end_date }}</td>
+                  <td><span class="status completed">{{battle.challenge_amount}}</span></td>
+               </tr>
+               {% endfor %}
+            </tbody>
+         </table>
+      </div>
+      <div class="todo">
+         <div class="head">
+            <h3>Leaderboard</h3>
+            <i class="bx bx-plus"></i>
+            <i class="bx bx-filter"></i>
+         </div>
+         <ul class="todo-list">
+            {% for user in money%}
+            <li class="completed">
+               <p>{{user.user_name}}</p>
+               <span>{{user.money}}</span>
+            </li>
+            {%endfor%}
+         </ul>
+      </div>
+   </div>
+</main>
+{% endblock %}
